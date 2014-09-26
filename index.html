@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Travisified</title>
+<style>
+body { font-family: sans-serif; }
+</style>
+</head>
+<body>
+
+<h2>Travisified</h2>
+<h3>Pinging when Travis builds finish in a GitHub Pull Request.</h3>
+
+<p><b>Step 1.</b><br>
+Add the following to your <code>.travis.yml</code> to play ball.</p>
+
+<pre>
+notifications:
+  webhooks: https://travisified.paas.allizom.org/webbook
+</pre>
+
+
+<p><b>Step 2.</b>
+<br>
+Make a pull request to <a href="https://github.com/peterbe/travisified">projects.ini</a>
+to include your project's config there.
+</p>
+
+<p><b>Step 3.</b><br>
+  Run Travis CI Jobs and hope for the best!</p>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+name: travisified
+url:
+    - travisified.paas.allizom.org
+framework:
+    type: python
+    runtime: python27
+mem: 128M
+requirements:
+    pypm:
+        - requests
+instances: 1
+processes:
+    web: ./app.py
