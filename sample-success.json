@@ -1,0 +1,125 @@
+{
+  "finished_at": "2014-09-26T16:34:24Z", 
+  "build_url": "https://travis-ci.org/mozilla/socorro/builds/36372364", 
+  "number": "415", 
+  "author_name": "Peter Bengtsson", 
+  "result": 0, 
+  "type": "pull_request", 
+  "duration": 621, 
+  "message": "using a webhook", 
+  "started_at": "2014-09-26T16:24:03Z", 
+  "id": 36372364, 
+  "committer_email": "mail@peterbe.com", 
+  "matrix": [
+    {
+      "status": 0, 
+      "repository_id": 26398, 
+      "committer_email": "mail@peterbe.com", 
+      "committer_name": "Peter Bengtsson", 
+      "author_email": "mail@peterbe.com", 
+      "committed_at": "2014-09-26T16:23:01Z", 
+      "number": "415.1", 
+      "author_name": "Peter Bengtsson", 
+      "compare_url": "https://github.com/mozilla/socorro/pull/2400", 
+      "parent_id": 36372364, 
+      "state": "finished", 
+      "result": 0, 
+      "branch": "master", 
+      "finished_at": "2014-09-26T16:34:24Z", 
+      "commit": "55b33479612405a8c2f74951f866c95b7713797a", 
+      "message": "using a webhook", 
+      "config": {
+        "before_script": [
+          "psql -c \"create user test with encrypted password 'aPassword' superuser;\" -U postgres", 
+          "psql -c 'create database socorro_test;' -U postgres", 
+          "psql -c 'create database socorro_integration_test;' -U postgres", 
+          "psql -c 'create database socorro_migration_test;' -U postgres"
+        ], 
+        ".result": "configured", 
+        "language": "python", 
+        "script": [
+          "./scripts/build.sh"
+        ], 
+        "python": "2.6", 
+        "notifications": {
+          "webhooks": "http://requestb.in/1hw0pfj1"
+        }, 
+        "before_install": [
+          "sudo apt-get update -qq", 
+          "sudo apt-get install -y npm libxml2-dev libxslt1-dev", 
+          "wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.13.deb", 
+          "sudo dpkg -i elasticsearch-0.90.13.deb", 
+          "sudo service elasticsearch restart", 
+          "npm install -g less", 
+          "sudo ln -s /usr/local/lib/node_modules/less/bin/lessc /usr/local/bin", 
+          "sed -i 's:jenkins-pg92:localhost:' config/alembic.ini-dist"
+        ], 
+        "install": true, 
+        "services": [
+          "rabbitmq", 
+          "memcached", 
+          "elasticsearch"
+        ], 
+        "addons": {
+          "postgresql": "9.3"
+        }
+      }, 
+      "id": 36372365
+    }
+  ], 
+  "author_email": "mail@peterbe.com", 
+  "branch": "master", 
+  "status_message": "Passed", 
+  "result_message": "Passed", 
+  "pull_request_number": 2400, 
+  "status": 0, 
+  "repository": {
+    "url": "https://wiki.mozilla.org/Socorro", 
+    "owner_name": "mozilla", 
+    "id": 26398, 
+    "name": "socorro"
+  }, 
+  "compare_url": "https://github.com/mozilla/socorro/pull/2400", 
+  "config": {
+    "before_script": [
+      "psql -c \"create user test with encrypted password 'aPassword' superuser;\" -U postgres", 
+      "psql -c 'create database socorro_test;' -U postgres", 
+      "psql -c 'create database socorro_integration_test;' -U postgres", 
+      "psql -c 'create database socorro_migration_test;' -U postgres"
+    ], 
+    ".result": "configured", 
+    "language": "python", 
+    "script": [
+      "./scripts/build.sh"
+    ], 
+    "python": [
+      "2.6"
+    ], 
+    "notifications": {
+      "webhooks": "http://requestb.in/1hw0pfj1"
+    }, 
+    "before_install": [
+      "sudo apt-get update -qq", 
+      "sudo apt-get install -y npm libxml2-dev libxslt1-dev", 
+      "wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.13.deb", 
+      "sudo dpkg -i elasticsearch-0.90.13.deb", 
+      "sudo service elasticsearch restart", 
+      "npm install -g less", 
+      "sudo ln -s /usr/local/lib/node_modules/less/bin/lessc /usr/local/bin", 
+      "sed -i 's:jenkins-pg92:localhost:' config/alembic.ini-dist"
+    ], 
+    "install": true, 
+    "services": [
+      "rabbitmq", 
+      "memcached", 
+      "elasticsearch"
+    ], 
+    "addons": {
+      "postgresql": "9.3"
+    }, 
+    "os": "linux"
+  }, 
+  "committed_at": "2014-09-26T16:23:01Z", 
+  "commit": "55b33479612405a8c2f74951f866c95b7713797a", 
+  "committer_name": "Peter Bengtsson"
+}

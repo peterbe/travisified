@@ -2,26 +2,25 @@
 import json
 import os
 import ConfigParser
-import socket
+# import socket
 import random
 
 import requests
 
-from flask import Flask, request, make_response, jsonify, send_file
+from flask import Flask, request, make_response, send_file
 from flask.views import MethodView
 
 
 DEBUG = os.environ.get('DEBUG', False) in ('true', '1', 'y', 'yes')
 GITHUB_OAUTH_TOKEN = os.environ.get('GITHUB_OAUTH_TOKEN')
-
-app = Flask(__name__)
-
 IRC_NICK = 'travisified'
-
 INI_LOCATION = os.path.join(
     os.path.dirname(__file__),
     'projects.ini'
 )
+
+app = Flask(__name__)
+
 
 @app.route('/')
 def index_html():
@@ -63,16 +62,16 @@ class WebhookView(MethodView):
         payload = json.loads(request.form['payload'])
 
         assert payload['type'] == 'pull_request', payload['type']
-        author_email = payload['author_email']
-        build_url = payload['build_url']
-        compare_url = payload['compare_url']
+        # author_email = payload['author_email']
+        # build_url = payload['build_url']
+        # compare_url = payload['compare_url']
 
         repo_name = payload['repository']['name']  # e.g. socorro
         repo_owner = payload['repository']['owner_name']  # e.g. mozilla
-        commit_msg = payload['message']  # e.g. "fixes bug 12345 - something"
+        # commit_msg = payload['message']  # e.g. "fixes bug 12345 - something"
 
         result = payload['result']
-        result_message = payload['result_message']
+        # result_message = payload['result_message']
 
         section_key = '%s/%s' % (repo_owner, repo_name)
         if not config.has_section(section_key):
@@ -139,7 +138,6 @@ class WebhookView(MethodView):
             repo,
             pull
         )
-        print url
         r = requests.post(
             url,
             data=json.dumps({
@@ -157,7 +155,6 @@ class WebhookView(MethodView):
                 r.content
             ))
 
-
     # def _send_irc_message(self, server, port, channel, message):
     #     sock = socket.socket()
     #     sock.connect((server, port))
@@ -167,14 +164,11 @@ class WebhookView(MethodView):
     #         sock.send(msg + '\r\n')
     #
     #     send("NICK %s" % IRC_NICK)
-    #     send("USER %(nick)s %(nick)s %(nick)s :%(nick)s" % {'nick': IRC_NICK})
     #     send("PRIVMSG R : Login <>")
     #     send("MODE %s +x" % IRC_NICK)
     #     send("JOIN %s" % channel)
     #     send("PRIVMSG %s :%s" % (channel, message))
     #
-
-
 
 app.add_url_rule('/webhook', view_func=WebhookView.as_view('webbook'))
 
